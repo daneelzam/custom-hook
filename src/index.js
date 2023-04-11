@@ -1,8 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
+import ReactDOM from 'react-dom/client';
+import { BookSearch } from './BookSearch'
 const App = () => {
-  return <h1>Hello, World!</h1>;
+  return (
+    <div>
+        <h1>Hello, World!</h1>
+        <BookSearch/>
+    </div>
+    );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
