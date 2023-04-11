@@ -25,4 +25,4 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{"./BookSearch":"De7r"}],"H99C":[function(require,module,exports) {
 "use strict";var e=r(require("react")),t=r(require("react-dom/client")),l=require("./BookSearch");function r(e){return e&&e.__esModule?e:{default:e}}var u=function(){return e.default.createElement("div",null,e.default.createElement("h1",null,"Hello, World!"),e.default.createElement(l.BookSearch,null))},a=t.default.createRoot(document.getElementById("root"));a.render(e.default.createElement(e.default.StrictMode,null,e.default.createElement(u,null)));
 },{"react":"HdMw","react-dom/client":"U1bq","./BookSearch":"IQIv"}]},{},["H99C"], null)
-//# sourceMappingURL=/src.042ea396.js.map
+//# sourceMappingURL=src.042ea396.js.map
