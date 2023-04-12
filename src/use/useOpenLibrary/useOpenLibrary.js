@@ -2,12 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { fetchInfoOpenLibrary } from './utils';
 
 /**
-useOpenLibrary - кастомный хук для работы с API Open Library.
-@param {string} query - поисковый запрос.
-@returns {object} - объект со следующими свойствами:
-books - массив объектов книг, соответствующих запросу.
-isLoading - состояние загрузки книг.
-isError - состояние ошибки при загрузке книг.
+useOpenLibrary - custom hook for working with the Open Library API.
+@param {string} query - search query.
+@returns {object} - object with the following properties:
+books - an array of book objects matching the query.
+isLoading - book loading status.
+isError - error state when loading books.
 */
 export const useOpenLibrary = (query) => {
   const [books, setBooks] = useState([]);

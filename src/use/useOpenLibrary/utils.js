@@ -1,8 +1,8 @@
 /**
- * fetchInfoOpenLibrary - функция для запроса информации о книгах и авторах с помощью API Open Library.
- * @param {string} query - поисковый запрос.
- * @returns {Promise} - промис с результатом запроса.
- * @throws {Error} - если запрос завершился ошибкой.
+ * fetchInfoOpenLibrary - a function to query information about books and authors using the Open Library API.
+ * @param {string} query - search query.
+ * @returns {Promise} - a promise with the result of the request.
+ * @throws {Error} - if the request fails.
  * */
 export const fetchInfoOpenLibrary = async (query) => {
     try {
