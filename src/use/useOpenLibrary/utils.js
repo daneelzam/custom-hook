@@ -6,7 +6,7 @@
  * */
 export const fetchInfoOpenLibrary = async (query) => {
     try {
-        const response = await fetch(`http://openlibrary.org/search.json?q=${query}`);
+        const response = await fetch(`https://openlibrary.org/search.json?q=${query}`);
         const data = await response.json();
         return data.docs;
     } catch (error) {
