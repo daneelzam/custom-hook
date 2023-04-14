@@ -1,7 +1,9 @@
 /**
  * fetchInfoOpenLibrary - a function to query information about books and authors using the Open Library API.
  * @param {string} query - search query.
- * @returns {Promise} - a promise with the result of the request.
+ * @returns {Promise<{
+ * key: 'string', title: 'string', author_name: string[], first_publish_year: number
+ * }[]>} - a promise with the result of the request.
  * @throws {Error} - if the request fails.
  * */
 export const fetchInfoOpenLibrary = async (query) => {

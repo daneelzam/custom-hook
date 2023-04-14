@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BookSearch } from './BookSearch'
+import './style.css'
+
 const App = () => {
   return (
-    <div>
-        <h1>Hello, World!</h1>
+    <div className='wrapper'>
+        <h1 className='header'>Use our custom hook for Open Library API</h1>
         <BookSearch/>
     </div>
     );

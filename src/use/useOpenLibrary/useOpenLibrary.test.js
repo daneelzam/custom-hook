@@ -18,7 +18,7 @@ describe('useOpenLibrary', () => {
   });
 
   it('should return initial state', () => {
-    const { result } = renderHook(() => useOpenLibrary('test'));
+    const { result } = renderHook(() => useOpenLibrary());
     expect(result.current.books).toEqual([]);
     expect(result.current.isLoading).toBeFalsy();
     expect(result.current.isError).toBeFalsy();
@@ -26,8 +26,8 @@ describe('useOpenLibrary', () => {
 
   it('should fetch books and update state on query change', async () => {
     const books = [
-      { title: 'Book 1', author: 'Author 1' },
-      { title: 'Book 2', author: 'Author 2' },
+      { key: 'key1', title: 'Title 1', author_name: ['Author name 1'], first_publish_year: 1},
+      { key: 'key2', title: 'Title 2', author_name: ['Author name 2'], first_publish_year: 1},
     ];
     fetchInfoOpenLibrary.mockResolvedValue(books);
 

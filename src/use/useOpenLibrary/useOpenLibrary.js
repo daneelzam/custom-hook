@@ -4,7 +4,11 @@ import { fetchInfoOpenLibrary } from './utils';
 /**
 useOpenLibrary - custom hook for working with the Open Library API.
 @param {string} query - search query.
-@returns {object} - object with the following properties:
+@returns {{
+  books: {key: 'string', title: 'string', author_name: string[], first_publish_year: number}[],
+  isLoading: boolean,
+  isError: boolean
+}} - object with the following properties:
 books - an array of book objects matching the query.
 isLoading - book loading status.
 isError - error state when loading books.
@@ -31,7 +35,7 @@ export const useOpenLibrary = (query) => {
   };
   
   useEffect(() => {
-    if (query.trim() === '') {
+    if (!query || query.trim() === '') {
       setBooks([]);
       return;
     } else {

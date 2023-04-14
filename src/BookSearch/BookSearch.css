@@ -1,0 +1,9 @@
+.search {
+   width: 100%; 
+}
+
+.listItem {
+    border: 1px solid gray;
+    margin: 5px;
+    padding: 5px;
+}
