@@ -28901,10 +28901,12 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 /**
- * fetchInfoOpenLibrary - функция для запроса информации о книгах и авторах с помощью API Open Library.
- * @param {string} query - поисковый запрос.
- * @returns {Promise} - промис с результатом запроса.
- * @throws {Error} - если запрос завершился ошибкой.
+ * fetchInfoOpenLibrary - a function to query information about books and authors using the Open Library API.
+ * @param {string} query - search query.
+ * @returns {Promise<{
+ * key: 'string', title: 'string', author_name: string[], first_publish_year: number
+ * }[]>} - a promise with the result of the request.
+ * @throws {Error} - if the request fails.
  * */
 var fetchInfoOpenLibrary = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(query) {
@@ -28957,12 +28959,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /**
-useOpenLibrary - кастомный хук для работы с API Open Library.
-@param {string} query - поисковый запрос.
-@returns {object} - объект со следующими свойствами:
-books - массив объектов книг, соответствующих запросу.
-isLoading - состояние загрузки книг.
-isError - состояние ошибки при загрузке книг.
+useOpenLibrary - custom hook for working with the Open Library API.
+@param {string} query - search query.
+@returns {{
+  books: {key: 'string', title: 'string', author_name: string[], first_publish_year: number}[],
+  isLoading: boolean,
+  isError: boolean
+}} - object with the following properties:
+books - an array of book objects matching the query.
+isLoading - book loading status.
+isError - error state when loading books.
 */
 var useOpenLibrary = function useOpenLibrary(query) {
   var _useState = (0, _react.useState)([]),
@@ -29012,7 +29018,7 @@ var useOpenLibrary = function useOpenLibrary(query) {
     };
   }();
   (0, _react.useEffect)(function () {
-    if (query.trim() === '') {
+    if (!query || query.trim() === '') {
       setBooks([]);
       return;
     } else {
@@ -29045,7 +29051,62 @@ Object.defineProperty(exports, "useOpenLibrary", {
   }
 });
 var _useOpenLibrary = require("./useOpenLibrary");
-},{"./useOpenLibrary":"src/use/useOpenLibrary/useOpenLibrary.js"}],"src/BookSearch/BookSearch.js":[function(require,module,exports) {
+},{"./useOpenLibrary":"src/use/useOpenLibrary/useOpenLibrary.js"}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+  return bundleURL;
+}
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+  return '/';
+}
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+    cssTimeout = null;
+  }, 50);
+}
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/BookSearch/BookSearch.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/BookSearch/BookSearch.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29054,6 +29115,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.BookSearch = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _useOpenLibrary2 = require("../use/useOpenLibrary");
+require("./BookSearch.css");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -29075,17 +29137,19 @@ var BookSearch = function BookSearch() {
     setSearchQuery(e.target.value);
   };
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
+    className: "search",
     type: "text",
     value: searchQuery,
     onChange: handleChange
-  }), isLoading && /*#__PURE__*/_react.default.createElement("div", null, "Loading..."), isError && /*#__PURE__*/_react.default.createElement("div", null, "Error loading data"), !isLoading && books && /*#__PURE__*/_react.default.createElement("ul", null, books.map(function (book) {
+  }), isLoading && /*#__PURE__*/_react.default.createElement("div", null, "Loading..."), isError && /*#__PURE__*/_react.default.createElement("div", null, "Error loading data"), !isLoading && books && /*#__PURE__*/_react.default.createElement("ul", null, books && books.map(function (book) {
     return /*#__PURE__*/_react.default.createElement("li", {
-      key: book.key
-    }, book.title);
+      key: book.key,
+      className: "listItem"
+    }, 'author_name' in book && book.author_name.length && /*#__PURE__*/_react.default.createElement("div", null, "Author: ", book.author_name[0]), /*#__PURE__*/_react.default.createElement("div", null, "Title: ", book.title), /*#__PURE__*/_react.default.createElement("div", null, "First publish year: ", book.first_publish_year));
   })));
 };
 exports.BookSearch = BookSearch;
-},{"react":"node_modules/react/index.js","../use/useOpenLibrary":"src/use/useOpenLibrary/index.js"}],"src/BookSearch/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../use/useOpenLibrary":"src/use/useOpenLibrary/index.js","./BookSearch.css":"src/BookSearch/BookSearch.css"}],"src/BookSearch/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29098,19 +29162,28 @@ Object.defineProperty(exports, "BookSearch", {
   }
 });
 var _BookSearch = require("./BookSearch");
-},{"./BookSearch":"src/BookSearch/BookSearch.js"}],"src/index.js":[function(require,module,exports) {
+},{"./BookSearch":"src/BookSearch/BookSearch.js"}],"src/style.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
 var _client = _interopRequireDefault(require("react-dom/client"));
 var _BookSearch = require("./BookSearch");
+require("./style.css");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var App = function App() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Hello, World!"), /*#__PURE__*/_react.default.createElement(_BookSearch.BookSearch, null));
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "wrapper"
+  }, /*#__PURE__*/_react.default.createElement("h1", {
+    className: "header"
+  }, "Use our custom hook for Open Library API"), /*#__PURE__*/_react.default.createElement(_BookSearch.BookSearch, null));
 };
 var root = _client.default.createRoot(document.getElementById('root'));
 root.render( /*#__PURE__*/_react.default.createElement(_react.default.StrictMode, null, /*#__PURE__*/_react.default.createElement(App, null)));
-},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","./BookSearch":"src/BookSearch/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","./BookSearch":"src/BookSearch/index.js","./style.css":"src/style.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29135,7 +29208,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60465" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53943" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

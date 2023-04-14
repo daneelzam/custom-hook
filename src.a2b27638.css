@@ -1,0 +1,19 @@
+.search {
+   width: 100%; 
+}
+
+.listItem {
+    border: 1px solid gray;
+    margin: 5px;
+    padding: 5px;
+}
+.wrapper {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.header {
+    text-align: center;
+}
+
+/*# sourceMappingURL=/src.a2b27638.css.map */
